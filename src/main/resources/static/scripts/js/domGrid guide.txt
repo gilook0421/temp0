@@ -1,0 +1,88 @@
+/*
+domGrid 가이드
+*/
+
+@ CSS는 별도로 구현해야함.
+@ jquery는 include 필수.
+
+---------------------------------- tag 샘플 --------------------------
+<body style="margin-left:0px; margin-top:0px;">
+<!-- 테두리 시작 -->
+<% wWidth = "795" %>
+<table border="0" cellpadding="1" cellspacing="1" bgcolor="<%bg_table_1%>" style="width:<%= wWidth%>px;margin-bottom:10px;">
+    <tr>
+        <td bgcolor="<%=bg_td_2%>" style="padding:2px;">
+            <table border="0" cellpadding="5" cellspacing="0" bgcolor="<%=bg_table_2%>" style="width:100%;">
+                <tr>
+                    <td bgcolor="<%=bg_td_2%>" style="padding:5px;">
+                    <%
+                    frm_tbl_width = 777 // 전체
+                    tit_div_width = frm_tbl_width - 19 // 제목
+                    dat_div_width = frm_tbl_width -2 // 내용
+                    dat_tbl_width = 777 + 500 // 제목&내용
+                    dat_tbl_height = 1 + (23*15) // 내용 height 1+(23*row)
+                    %>
+                        <table border="1" cellpadding="0" cellspacing="0" bgcolor="#fffff5" style="width:<%=frm_tbl_width%>px; margin-bottom:0px; border-collapse:collapse; border:0px solid gray;">
+                            <tr class="titl_edit">
+                                <td>
+                                    <div name="title02" id="title02" style="width:<%=tit_div_width%>px; overflow:hidden;">
+                                        <table border="0" cellpadding="0" cellspacing="1" style="width:<%=dat_tbl_width%>px; border-collapse:separate; margin-bottom:-1px;" bgcolor="#bebebe">
+                                            <tr style="heigth:22px;" class="titl_edit">
+                                                <td style="width: 07%;">헤더0</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div name="data02" id="data02" style="width:<%=dat_div_width%>px; heigth:<%=dat_tbl_height%>px; overflow:auto;" tabindex="0">
+                                        <table id="table_matrix" border="0" cellpadding="0" cellspacing="1" style="width:<%=dat_tbl_width%>px; border-collapse:separate; table-layout:fixed;" bgcolor="#bebebe">
+                                            <colgroup>
+                                                <col style="width: 07%;"/>
+                                            </colgroup>
+                                            <tr style="heigth:22px;" class="cent_whit domrow">
+                                                <td></td>
+                                            </tr>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+---------------------------------- script 샘플 --------------------------
+<script language="javascript" src="../domGrid.js" ></script>
+//조회 버튼 클릭시
+function search(){
+    var tdAlign = [2];
+    domGrid_Set("table_matrix", tdAlign, domChoiceResult);
+}
+function domChoiceResult(choiceRowValue, choiceType){
+    if(choiceType == "click" || choiceType == "first"){
+        //console.log("조회 완료 후 첫번째 행 / 클릭시");
+        //f.test.value = choiceRowValue[4];
+    }
+    if(choiceType == "dblclick"){
+        //console.log("더블클릭시");
+    }
+}
+function dataCreate(){
+    var rows = 10; //데이터 조회건수
+    var cols = 10; //데이터 컬럼수
+
+    var td_data = new Array[rows][cols];
+    for(int i = 0 ; i < rows ; i++){
+        td_data[i][0] = "test";
+        td_data[i][1] = "test1";
+        td_data[i][2] = "test1";
+
+        domGrid_Add([i]);
+    }
+}

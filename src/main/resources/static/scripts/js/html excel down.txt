@@ -1,0 +1,52 @@
+function excelDown(){
+
+    var excelStr = "";
+    for(int i = 0 ; i < dataRows.length ; i++){
+        excelStr += "<tr>";
+        for(j = 0 ; j < dataCols.length ; j++){
+            excelStr += "<td align=center>" + dataCols[i][j] + "</td>";
+        }
+        excelStr += "</td>";
+    }
+
+    f.excelStr.value = excelStr;
+    f.target = "action";
+    f.action = "excel.asp";
+    f.submit();
+}
+
+
+---------------------------------- tag 샘플 --------------------------
+<form ~~~>
+<input type="hidden" name="excelStr"></input>
+</form>
+
+
+
+---------------------------------- action 샘플 --------------------------
+<%
+Response.Buffer = true;
+Response.Expires = 0;
+Response.Expiresabsolute = now();
+Response.AddHeader = "pragma","public";
+Response.CacheControl = "public";
+Response.AddHeader = "Content-Disposition","attachment;filename=엑셀파일명.xls";
+Response.Charset = "euc-kr";
+%>
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <table>
+            <tr>
+                <td>head title</td>
+            </tr>
+            <tr>
+                <td>일자</td>
+                <td>통화</td>
+            </tr>
+            <%=excelStr%>
+        </table>
+    </body>
+</html>

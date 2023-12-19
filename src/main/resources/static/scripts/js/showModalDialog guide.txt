@@ -1,0 +1,44 @@
+/*
+사용가이드
+*/
+
+
+------------------------------------------------ sample(opener) ----------------------------------------------
+<script language="javascript" src="../showModalDialog.js" ></script>
+function temp(){
+    var url = "../popup.jsp";
+    var varParam = "";
+    var openParam = "dialogWidth:700px;dialogHeight:365px;scroll:no;status:no;center:yes;resizable:yes;";   
+    //window.showModalDialog(url, varParam, openParam, "rsltCallback");
+    window.showModalDialog(url, varParam, openParam, rsltCallback);
+}
+
+
+function rsltCallback(retVal) {
+
+    if (Array.isArray(retVal)) {
+        f.temp.value = retVal[0];
+    }
+    else{
+        f.test.value = retVal;
+    }
+
+}
+------------------------------------------------ sample(pop) ----------------------------------------------
+<script language="javascript" src="../showModalDialogCallee.js" ></script>
+window.onload = function(){
+    getDialogArguments();   
+    var varParam = window.dialogArguments;
+}
+
+window.onunload = function(){
+    // @array type
+    //var retVal = new Array(3);
+    //retVal[0] = "1";
+    // @value type
+    //var retVal = "1";
+
+    setReturnValue(retVal);   
+    parent.window.returnValue = retVal; 
+    parent.window.close();
+}

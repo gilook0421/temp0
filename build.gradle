@@ -21,6 +21,22 @@ repositories {
 	mavenCentral()
 }
 
+//Dependency란?
+//Dependency란 어떤 모듈을 빌드, 테스트, 실행하기 위해 필요한 다른 소프트웨어에 대한 포인터이다.
+//developmentOnly
+//Gradle의 develpmentOnly는 개발 환경에만 적용되는 설정이다. 
+//즉, 운영 환경에 배포되는 jar, war 파일에는 developmentOnly로 설치된 라이브러리는 제외된다.
+//compileOnly
+//해당 라이브러리가 컴파일 단계에서만 필요한 경우 사용한다. 
+//롬복은 컴파일 시 애노테이션에 해당하는 코드를 삽입해주는 기능을 하므로 compileOnly 옵션을 붙여준다.
+//runtimeOnly
+//해당 라이브러리가 런타임에서만 필요한 경우에 사용한다.
+//annotationProcessor
+//컴파일 단계에서 annotation을 분석하고 처리하기 위해 사용된다.
+//implementation
+//라이브러리 설치를 위해 일반적으로 사용하는 설정이다. 
+//implementation은 해당 라이브러리가 변경되더라도 이 라이브러리와 연관된 모든 모듈들을 컴파일하지 않고 
+//직접 관련이 있는 모듈들만 컴파일하기 때문에 rebuild 속도가 빠르다.
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	compileOnly 'org.projectlombok:lombok'
